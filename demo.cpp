@@ -11,12 +11,29 @@
 
 using namespace hash;
 
+#include <iostream>
 
+/*!
+ * @brief User specified type for insert into indexing database.
+ *        the member names, i.e. @id and @code, shall not change.
+ */
 struct info_type
 {
 	int id;
 	HashBuilder::code_type code;
 };
+
+/*!
+ * @brief Output info_type to the output stream.
+ * @param os
+ * @param v
+ * @return
+ */
+std::ostream& operator<<(std::ostream& os, const info_type& v)
+{
+	os << "(" << v.id << ", " << v.code << ")";
+	return os;
+}
 
 
 int main()
@@ -46,6 +63,11 @@ int main()
 	code_type c = hasher.hash(feature, sizeof(feature)/sizeof(float));
 	auto results = retriever.query(c);
 
+	// print results
+	for (auto it = results.begin(); it != results.end(); ++it) {
+		std::cout << it->first << " ";
+	}
+	std::cout << std::endl;
 	return 0;
 }
 
