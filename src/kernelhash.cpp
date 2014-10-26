@@ -37,7 +37,7 @@ KernelHash::code_type KernelHash::hash(float* data, int len) const
 	const int nanchors = anchors.rows;
 	Mat_<float> dist(1, nanchors);
 	for (int i = 0; i < nanchors; ++i) {
-		double l2 = norm(feature, anchors.row(i), cv::NORM_L2);
+		float l2 = norm(feature, anchors.row(i), cv::NORM_L2);
 		dist(i) = l2*l2;
 	}
 
